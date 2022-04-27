@@ -16,12 +16,27 @@ class InitPage extends GetView<InitController> {
         title: Text("Init Page"),
         centerTitle: true,
       ),
-      body: const Center(
-        child: Text(
-          'InitPage is working',
-          style: TextStyle(fontSize: 20),
-        ),
-      ),
+      body: Center(
+          child: Column(
+        children: [
+          Obx(() {
+            return Text("name: ${controller.weather.value.name}");
+          }),
+          Obx(() {
+            return Text(
+                "coords: ${controller.weather.value.coord?.lat} + ${controller.weather.value.coord?.lon} ");
+          }),
+          Obx(() {
+            return Text(
+                "weather: ${controller.weather.value.weather?.first.main}");
+          }),
+          ElevatedButton(
+              onPressed: () async {
+                await controller.getLocation();
+              },
+              child: Text("Get Location on api"))
+        ],
+      )),
     );
   }
 }
