@@ -1,3 +1,4 @@
+import 'package:changetherhythmwithget/app/data/providers/api_keys.dart';
 import 'package:changetherhythmwithget/app/data/providers/weather_api_provider.dart';
 import 'package:changetherhythmwithget/app/data/services/weather_api_service.dart';
 import 'package:changetherhythmwithget/app/modules/init/init_binding.dart';
@@ -8,6 +9,7 @@ class ApplicationBindings extends Bindings {
   void dependencies() {
     print("ApplicationBindings initializing...");
     
+
     Get.lazyPut<WeatherApiProvider>(
       WeatherApiProvider.new,
     );
