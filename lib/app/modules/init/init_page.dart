@@ -9,11 +9,13 @@ class InitPage extends GetView<InitController> {
   @override
   InitController get controller => Get.find();
 
+  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Init Page"),
+        title: const Text("Init Page"),
         centerTitle: true,
       ),
       body: Center(
@@ -30,11 +32,27 @@ class InitPage extends GetView<InitController> {
             return Text(
                 "weather: ${controller.weather.value.weather?.first.main}");
           }),
-          ElevatedButton(
-              onPressed: () async {
-                await controller.getLocation();
+          Form(
+            key: controller.formkey.value,
+            child: TextFormField(
+              controller: controller.locationTexrEditingController.value,
+              decoration: const InputDecoration(
+                labelText: "Location",
+              ),
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return "Please enter a location";
+                }
+                return null;
               },
-              child: Text("Get Location on api"))
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () async {
+              await controller.getLocation();
+            },
+            child: const Text("Get Location on api"),
+          ),
         ],
       )),
     );

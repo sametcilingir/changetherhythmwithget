@@ -9,5 +9,6 @@ class InitBinding extends Bindings {
       InitController.new,
     );
     print("InitBinding initializing...");
+    
   }
 }
