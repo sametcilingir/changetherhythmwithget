@@ -5,11 +5,11 @@ import 'package:changetherhythmwithget/app/data/services/weather_storage_service
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
+
 class ApplicationBindings extends Bindings {
   @override
   Future<void> dependencies() async {
     print("ApplicationBindings initializing...");
-
 
     Get.put<WeatherApiProvider>(
       WeatherApiProvider(),
@@ -26,5 +26,6 @@ class ApplicationBindings extends Bindings {
     Get.put<WeatherRepository>(
       WeatherRepository(),
     );
+    
   }
 }

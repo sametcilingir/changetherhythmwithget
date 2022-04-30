@@ -47,6 +47,8 @@ class WeatherRepository {
     return await weatherStorageService.getAllLocationsFromStorage();
   }
 
+  
+
   Future<void> clearLocations() async {
     await weatherStorageService.clearLocationsFromStorage();
   }

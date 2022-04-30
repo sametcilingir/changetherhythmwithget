@@ -8,7 +8,7 @@ class HomeRoutes {
 
   static final routes = [
     GetPage(
-      name: '/home',
+      name: '/home/:weatherName',
       page: HomePage.new,
       binding: HomeBinding(),
     ),

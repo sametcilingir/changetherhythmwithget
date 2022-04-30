@@ -9,8 +9,8 @@ class WeatherApiService extends GetxService {
 
   Future<WeatherModel> getWeatherApi(String location) async {
     try {
-      final response = await weatherApiProvider.getWeatherApi(location);
-      final weather = WeatherModel.fromJson(response.body);
+      var response = await weatherApiProvider.getWeatherApi(location);
+      var weather = WeatherModel.fromJson(response.body);
       return weather;
     } catch (e) {
       print(e);

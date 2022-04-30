@@ -1,3 +1,4 @@
+import 'package:changetherhythmwithget/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
 import 'init_controller.dart';
@@ -9,6 +10,5 @@ class InitBinding extends Bindings {
       InitController.new,
     );
     print("InitBinding initializing...");
-    
   }
 }
