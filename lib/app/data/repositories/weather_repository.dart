@@ -7,49 +7,82 @@ class WeatherRepository {
   WeatherApiService get weatherApiService => Get.find();
   WeatherStorageService get weatherStorageService => Get.find();
 
-  Future<WeatherModel> getLocation(String location) async {
-    final weather = await getLocationFromStorage(location);
-    if (weather.name != null) {
-      print("Weather from storage");
-      return weather;
-    } else {
-      final weather = await getLocationFromApi(location);
-      if (weather.name != null) {
-        print("Weather from api");
-        await weatherStorageService.saveWeatherToStorage(weather);
-        print("Weather saved to storage");
-        return weather;
+  Future<WeatherModel> getLocation({String? cityName, String? cityID}) async {
+    if (cityName != null) {
+      //city name sadece registerdan gelir ve kaydedilmesi gerekir
+      return await getWeatherFromApiWithCityName(cityName);
+    }
+    if (cityID != null) {
+      //city id var ise storage da var mı yok mu sorgulamak gerekir
+      var weatherFromStorage = await getWeatherFromStorage(cityID);
+      if (weatherFromStorage.id == null) {
+        //storage da yok ise api den çek ve kaydet
+        return await getWeatherFromApiWithCityID(cityID);
       } else {
-        return WeatherModel();
+        //storage da var ise direk olarak döndür
+        return weatherFromStorage;
       }
     }
+
+    return WeatherModel();
   }
 
-  Future<WeatherModel> getLocationFromStorage(String location) async {
-    final weather = await weatherStorageService.getWeatherFromStorage(location);
-    if (weather.name == null) {
-      return WeatherModel();
-    } else {
+  Future<WeatherModel> getWeatherFromApiWithCityName(String cityName) async {
+    try {
+      var weather =
+          await weatherApiService.getWeatherFromApiWithCityName(cityName);
+      await weatherStorageService.saveWeatherToStorage(weather);
       return weather;
+    } catch (e) {
+      print(e);
+      return WeatherModel();
     }
   }
 
-  Future<WeatherModel> getLocationFromApi(String location) async {
-    final weather = await weatherApiService.getWeatherApi(location);
-    if (weather.name == null) {
-      return WeatherModel();
-    } else {
+  Future<WeatherModel> getWeatherFromApiWithCityID(String cityID) async {
+    try {
+      var weather = await weatherApiService.getWeatherFromApiWithCityID(cityID);
+      await weatherStorageService.saveWeatherToStorage(weather);
       return weather;
+    } catch (e) {
+      print(e);
+      return WeatherModel();
     }
   }
 
-  Future<List<String>> getAllLocations() async {
-    return await weatherStorageService.getAllLocationsFromStorage();
+  Future<WeatherModel> getWeatherFromStorage(String cityID) async {
+    try {
+      var weather = await weatherStorageService.getWeatherFromStorage(cityID);
+      return weather;
+    } catch (e) {
+      print(e);
+      return WeatherModel();
+    }
   }
 
-  
+  Future<List<String>> getAllWeathersFromStorage() async {
+    try {
+      var locations = await weatherStorageService.getAllWeathersFromStorage();
+      return locations;
+    } catch (e) {
+      print(e);
+      return [];
+    }
+  }
 
-  Future<void> clearLocations() async {
-    await weatherStorageService.clearLocationsFromStorage();
+  Future<void> removeWeatherFromStorage(WeatherModel weatherModel) async {
+    try {
+      await weatherStorageService.removeWeatherFromStorage(weatherModel);
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> clearAllWeathersFromStorage() async {
+    try {
+      await weatherStorageService.clearAllWeathersFromStorage();
+    } catch (e) {
+      print(e);
+    }
   }
 }

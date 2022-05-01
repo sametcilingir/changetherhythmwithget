@@ -1,7 +1,5 @@
-import 'package:changetherhythmwithget/app/data/extensions/string_extension.dart';
 import 'package:changetherhythmwithget/app/data/models/weather_model.dart';
 import 'package:changetherhythmwithget/app/data/repositories/weather_repository.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../routes/app_pages.dart';
@@ -13,27 +11,28 @@ class InitController extends GetxController with StateMixin {
 
   Future<void> getSavedLocations() async {
     change("Loading", status: RxStatus.loading());
-    List<String> locationList = await weatherRepository.getAllLocations();
+    List<String> locationList =
+        await weatherRepository.getAllWeathersFromStorage();
     if (locationList.isNotEmpty) {
-      print("locationList: ${locationList}");
-      WeatherModel weather =
-          await weatherRepository.getLocation(locationList.last);
-
-      var weatherName = weather.name?.toLowerCase();
-
-      print("Weather: ${weatherName}");
-
-      Get.offAndToNamed("/home/$weatherName");
-      change("Başarılı", status: RxStatus.success());
+      var weather =
+          await weatherRepository.getLocation(cityID: locationList.last);
+      if (weather.id != null) {
+        await Get.offAndToNamed("/home/${weather.id}", arguments: weather);
+        change("Başarılı", status: RxStatus.success());
+      } else {
+        await Get.offAndToNamed(AppPages.REGISTER);
+        change("Can't find any location", status: RxStatus.empty());
+      }
     } else {
-      Get.offAndToNamed(AppPages.REGISTER);
-      change("Hata", status: RxStatus.error());
+      await Get.offAndToNamed(AppPages.REGISTER);
+      change("Can't find any location", status: RxStatus.empty());
     }
   }
 
   @override
   Future<void> onInit() async {
     super.onInit();
+
     await getSavedLocations();
   }
 }

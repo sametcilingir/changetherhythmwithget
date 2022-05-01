@@ -8,9 +8,10 @@ class HomeRoutes {
 
   static final routes = [
     GetPage(
-      name: '/home/:weatherName',
+      name: '/home/:cityID',
       page: HomePage.new,
       binding: HomeBinding(),
+      transition: Transition.cupertino 
     ),
   ];
 }

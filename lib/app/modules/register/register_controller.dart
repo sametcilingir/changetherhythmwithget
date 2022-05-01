@@ -18,21 +18,22 @@ class RegisterController extends GetxController {
     bool? val = formkey.value.currentState?.validate();
     if (val == true) {
       formkey.value.currentState?.save();
-      String? location =
-          locationTexrEditingController.value.text.capitalizeOnlyFirst();
+      String cityName = locationTexrEditingController
+          .value.text; //.removeSpacesAndToLoweCase();
 
-      weather.value = await weatherRepository.getLocation(location);
-      if (weather.value.name == null) {
-        debugPrint("Weather is null");
+      weather.value = await weatherRepository.getLocation(cityName: cityName);
+       
+
+      if (weather.value.id == null) {
         locationTexrEditingController.value.clear();
         Get.snackbar(
           "Error",
           "Location not found",
-          snackPosition: SnackPosition.BOTTOM,
+          snackPosition: SnackPosition.TOP,
           backgroundColor: Colors.red,
         );
       } else {
-        Get.offAndToNamed("/home/${weather.value.name}");
+        Get.offAndToNamed("/home/${weather.value.id}", arguments: weather.value);
       }
     } else {
       locationTexrEditingController.value.clear();

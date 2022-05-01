@@ -8,15 +8,15 @@ class WeatherStorageService extends GetxService {
 
   Future<void> saveWeatherToStorage(WeatherModel weatherModel) async {
     try {
-      await box.write("${weatherModel.name}", weatherModel);
+      await box.write("${weatherModel.id}", weatherModel);
     } catch (e) {
       print(e);
     }
   }
 
-  Future<WeatherModel> getWeatherFromStorage(String location) async {
+  Future<WeatherModel> getWeatherFromStorage(String cityID) async {
     try {
-      final weather = await box.read(location);
+      final weather = await box.read(cityID);
       return weather;
     } catch (e) {
       print(e);
@@ -26,13 +26,13 @@ class WeatherStorageService extends GetxService {
 
   Future<void> removeWeatherFromStorage(WeatherModel weatherModel) async {
     try {
-      await box.remove("${weatherModel.name}");
+      await box.remove("${weatherModel.id}");
     } catch (e) {
       print(e);
     }
   }
 
-  Future<List<String>> getAllLocationsFromStorage() async {
+  Future<List<String>> getAllWeathersFromStorage() async {
     try {
       Iterable<String> valueKeys = box.getKeys();
       return valueKeys.toList();
@@ -42,7 +42,7 @@ class WeatherStorageService extends GetxService {
     }
   }
 
-  Future<void> clearLocationsFromStorage() async {
+  Future<void> clearAllWeathersFromStorage() async {
     try {
       await box.erase();
     } catch (e) {

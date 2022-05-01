@@ -11,6 +11,7 @@ class RegisterRoutes {
       name: '/register',
       page: RegisterPage.new,
       binding: RegisterBinding(),
+      transition: Transition.cupertino 
     ),
   ];
 }

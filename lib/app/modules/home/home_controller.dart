@@ -7,7 +7,6 @@ import '../../data/repositories/weather_repository.dart';
 import '../../routes/app_pages.dart';
 
 class HomeController extends GetxController {
-
   WeatherRepository get weatherRepository => Get.find();
 
   var weather = WeatherModel().obs;
@@ -15,13 +14,19 @@ class HomeController extends GetxController {
   //var locationList = <String>[].obs;
 
   Future<void> getWeather() async {
-    String? weatherName = Get.parameters['weatherName']?.capitalizeOnlyFirst();
-    weather.value = await weatherRepository.getLocation(weatherName!);
+    var weatherModelFromRoute = Get.arguments;
+    if (weatherModelFromRoute != null) {
+      weather.value = weatherModelFromRoute;
+    } else {
+      String cityID = Get.parameters['cityID']!;
+      var weatherModel = await weatherRepository.getLocation(cityID: cityID);
+      weather.value = weatherModel;
+    }
   }
 
- Future<void> clearLocationFromStorage() async {
-    await weatherRepository.clearLocations();
-   Get.offAndToNamed(AppPages.INITIAL);
+  Future<void> clearLocationFromStorage() async {
+    await weatherRepository.clearAllWeathersFromStorage();
+    Get.offAndToNamed(AppPages.INITIAL);
   }
 
   /* Future<void> getSavedLocations() async {
@@ -36,7 +41,7 @@ class HomeController extends GetxController {
   @override
   Future<void> onInit() async {
     super.onInit();
-   await getWeather();
+    await getWeather();
   }
 
   @override

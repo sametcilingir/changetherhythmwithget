@@ -11,6 +11,7 @@ class InitRoutes {
       name: '/init',
       page: InitPage.new,
       binding: InitBinding(),
+      transition: Transition.cupertino 
     ),
   ];
 }
