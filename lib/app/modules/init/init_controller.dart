@@ -7,7 +7,6 @@ import '../../routes/app_pages.dart';
 class InitController extends GetxController with StateMixin {
   WeatherRepository get weatherRepository => Get.find();
 
-  //Todo home git meden storage da bulmadan burada kaydediyor, olsa bile api ye gidiyor
 
   Future<void> getSavedLocations() async {
     change("Loading", status: RxStatus.loading());
@@ -15,7 +14,7 @@ class InitController extends GetxController with StateMixin {
         await weatherRepository.getAllWeathersFromStorage();
     if (locationList.isNotEmpty) {
       var weather =
-          await weatherRepository.getLocation(cityID: locationList.last);
+          await weatherRepository.getWeather(cityID: locationList.last);
       if (weather.id != null) {
         await Get.offAndToNamed("/home/${weather.id}", arguments: weather);
         change("Başarılı", status: RxStatus.success());

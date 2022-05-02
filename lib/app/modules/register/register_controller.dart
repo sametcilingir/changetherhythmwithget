@@ -21,7 +21,7 @@ class RegisterController extends GetxController {
       String cityName = locationTexrEditingController
           .value.text; //.removeSpacesAndToLoweCase();
 
-      weather.value = await weatherRepository.getLocation(cityName: cityName);
+      weather.value = await weatherRepository.getWeather(cityName: cityName);
        
 
       if (weather.value.id == null) {

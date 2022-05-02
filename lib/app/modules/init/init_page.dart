@@ -13,10 +13,18 @@ class InitPage extends GetView<InitController> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: controller.obx(
-        (state) => Center(child: Text(state)),
-        onLoading: const Center(child: CircularProgressIndicator()),
-        onEmpty: const Center(child: Text('No data found')),
-        onError: (error) => Center(child: Text(error??'Error')),
+        (state) => Center(
+          child: Text(state),
+        ),
+        onLoading: const Center(
+          child: CircularProgressIndicator(),
+        ),
+        onEmpty: const Center(
+          child: Text('No data found'),
+        ),
+        onError: (error) => Center(
+          child: Text(error ?? 'Error'),
+        ),
       ),
     );
   }

@@ -7,7 +7,7 @@ class WeatherRepository {
   WeatherApiService get weatherApiService => Get.find();
   WeatherStorageService get weatherStorageService => Get.find();
 
-  Future<WeatherModel> getLocation({String? cityName, String? cityID}) async {
+  Future<WeatherModel> getWeather({String? cityName, String? cityID}) async {
     if (cityName != null) {
       //city name sadece registerdan gelir ve kaydedilmesi gerekir
       return await getWeatherFromApiWithCityName(cityName);
@@ -26,6 +26,7 @@ class WeatherRepository {
 
     return WeatherModel();
   }
+
 
   Future<WeatherModel> getWeatherFromApiWithCityName(String cityName) async {
     try {

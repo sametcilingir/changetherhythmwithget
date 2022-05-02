@@ -13,14 +13,28 @@ class HomeController extends GetxController {
 
   //var locationList = <String>[].obs;
 
-  Future<void> getWeather() async {
+  Future<void> refreshWeather() async {
+    try {
+      weather.value = await weatherRepository
+          .getWeatherFromApiWithCityID(weather.value.id.toString());
+      Get.snackbar(
+          "Updated",
+          "Weather has been updated successfully",
+          snackPosition: SnackPosition.TOP,
+          backgroundColor: Colors.green,
+        );
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> getWeatherFromRoute() async {
     var weatherModelFromRoute = Get.arguments;
     if (weatherModelFromRoute != null) {
       weather.value = weatherModelFromRoute;
     } else {
       String cityID = Get.parameters['cityID']!;
-      var weatherModel = await weatherRepository.getLocation(cityID: cityID);
-      weather.value = weatherModel;
+      weather.value = await weatherRepository.getWeather(cityID: cityID);
     }
   }
 
@@ -41,7 +55,7 @@ class HomeController extends GetxController {
   @override
   Future<void> onInit() async {
     super.onInit();
-    await getWeather();
+    await getWeatherFromRoute();
   }
 
   @override
