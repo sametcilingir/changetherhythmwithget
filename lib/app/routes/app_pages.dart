@@ -7,11 +7,11 @@ class AppPages {
 
   static const INITIAL = '/init';
   static const REGISTER = '/register';
-  
+  static const HOME = '/home';
 
   static final routes = [
     ...InitRoutes.routes,
     ...HomeRoutes.routes,
-		...RegisterRoutes.routes,
+    ...RegisterRoutes.routes,
   ];
 }

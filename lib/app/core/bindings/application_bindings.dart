@@ -1,9 +1,9 @@
-import 'package:changetherhythmwithget/app/data/providers/weather_api_provider.dart';
-import 'package:changetherhythmwithget/app/data/repositories/weather_repository.dart';
-import 'package:changetherhythmwithget/app/data/services/weather_api_service.dart';
-import 'package:changetherhythmwithget/app/data/services/weather_storage_service.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
+
+import '../../data/providers/weather_api_provider.dart';
+import '../../data/repositories/weather_repository.dart';
+import '../../data/services/weather_api_service.dart';
+import '../../data/services/weather_storage_service.dart';
 
 
 class ApplicationBindings extends Bindings {

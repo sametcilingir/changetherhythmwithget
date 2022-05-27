@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'home_controller.dart';
 
 class HomePage extends GetView<HomeController> {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   HomeController get controller => super.controller;
@@ -14,7 +14,7 @@ class HomePage extends GetView<HomeController> {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          padding: EdgeInsets.all(24),
+          padding: const EdgeInsets.all(24),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -27,7 +27,7 @@ class HomePage extends GetView<HomeController> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text("${controller.weather.value.name}",
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black)),
@@ -36,7 +36,7 @@ class HomePage extends GetView<HomeController> {
                                     .toInt()
                                     .toString() +
                                 "°C",
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 92,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black)),
@@ -48,17 +48,17 @@ class HomePage extends GetView<HomeController> {
                           onPressed: () async {
                             await controller.refreshWeather();
                           },
-                          icon: Icon(Icons.refresh),
+                          icon: const Icon(Icons.refresh),
                           color: Colors.black,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         RotatedBox(
                           quarterTurns: 3,
                           child: Text(
                               "${controller.weather.value.weather!.first.main}",
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black)),
@@ -68,7 +68,7 @@ class HomePage extends GetView<HomeController> {
                   ],
                 ),
               ),
-              Expanded(
+              const Expanded(
                 flex: 6,
                 child: FlutterLogo(
                   size: 250,
@@ -93,11 +93,11 @@ class HomePage extends GetView<HomeController> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text("${controller.weather.value.main!.humidity}%",
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black)),
-                          Text("Humidity",
+                          const Text("Humidity",
                               style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
@@ -107,12 +107,12 @@ class HomePage extends GetView<HomeController> {
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text((controller.weather.value.visibility!/1000).toInt().toString()+" KM",
-                              style: TextStyle(
+                          Text((controller.weather.value.visibility!~/1000).toString()+" KM",
+                              style: const TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black)),
-                          Text("Visibility",
+                          const Text("Visibility",
                               style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
@@ -123,11 +123,11 @@ class HomePage extends GetView<HomeController> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text("${controller.weather.value.main!.pressure}",
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black)),
-                          Text("Pressure",
+                          const Text("Pressure",
                               style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
@@ -144,7 +144,7 @@ class HomePage extends GetView<HomeController> {
                   onPressed: () {
                     controller.clearLocationFromStorage();
                   },
-                  child: Text(
+                  child: const Text(
                     "Change Location",
                     style: TextStyle(fontSize: 18),
                   ),

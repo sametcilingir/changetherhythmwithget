@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'init_controller.dart';
 
 class InitPage extends GetView<InitController> {
-  const InitPage({Key? key}) : super(key: key);
+  const InitPage({super.key});
 
   @override
   InitController get controller => Get.find();

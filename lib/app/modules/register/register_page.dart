@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'register_controller.dart';
 
 class RegisterPage extends GetView<RegisterController> {
+  const RegisterPage({super.key});
+
   @override
   RegisterController get controller => super.controller;
 
@@ -12,7 +14,7 @@ class RegisterPage extends GetView<RegisterController> {
     return Scaffold(
       backgroundColor: Colors.blueAccent.shade100,
       floatingActionButton: FloatingActionButton(
-        child: Icon(
+        child: const Icon(
           Icons.arrow_right,
           color: Colors.blueAccent,
         ),
@@ -27,7 +29,7 @@ class RegisterPage extends GetView<RegisterController> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Expanded(
+            const Expanded(
               flex: 2,
               child: Center(
                   child: Text(
@@ -58,7 +60,7 @@ class RegisterPage extends GetView<RegisterController> {
                 ],
               ),
             ),
-            Expanded(
+            const Expanded(
               flex: 1,
               child: Text(
                   "Welcome to the weather app, before you can use it, you need to register your location."),

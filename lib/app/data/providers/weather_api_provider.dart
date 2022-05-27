@@ -1,5 +1,6 @@
-import 'package:changetherhythmwithget/app/data/providers/api_keys.dart';
 import 'package:get/get_connect.dart';
+
+import 'api_keys.dart';
 
 class WeatherApiProvider extends GetConnect {
   Future<Response> getWeatherFromApiWithCityName(String cityName) async => await get(

@@ -1,4 +1,3 @@
-import 'package:changetherhythmwithget/app/data/extensions/string_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,11 +17,9 @@ class RegisterController extends GetxController {
     bool? val = formkey.value.currentState?.validate();
     if (val == true) {
       formkey.value.currentState?.save();
-      String cityName = locationTexrEditingController
-          .value.text; //.removeSpacesAndToLoweCase();
+      String cityName = locationTexrEditingController.value.text;
 
       weather.value = await weatherRepository.getWeather(cityName: cityName);
-       
 
       if (weather.value.id == null) {
         locationTexrEditingController.value.clear();
@@ -33,28 +30,17 @@ class RegisterController extends GetxController {
           backgroundColor: Colors.red,
         );
       } else {
-        Get.offAndToNamed("/home/${weather.value.id}", arguments: weather.value);
+        Get.offAndToNamed("/home/${weather.value.id}",
+            arguments: weather.value);
       }
     } else {
       locationTexrEditingController.value.clear();
     }
   }
-
   @override
-  void onInit() async {
-    super.onInit();
-    print("RegisterController initializing...");
-  }
-
-  @override
-  Future<void> onReady() async {
-    super.onReady();
-    print("RegisterController ready!");
-  }
-
-  @override
-  void onClose() async {
+  void onClose() {
+    // TODO: implement onClose
     super.onClose();
-    print("RegisterController closing...");
+    locationTexrEditingController.value.dispose();
   }
 }

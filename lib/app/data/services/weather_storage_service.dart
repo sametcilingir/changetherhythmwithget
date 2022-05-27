@@ -16,7 +16,7 @@ class WeatherStorageService extends GetxService {
 
   Future<WeatherModel> getWeatherFromStorage(String cityID) async {
     try {
-      final weather = await box.read(cityID);
+      final weather = WeatherModel.fromJson(await box.read(cityID));
       return weather;
     } catch (e) {
       print(e);

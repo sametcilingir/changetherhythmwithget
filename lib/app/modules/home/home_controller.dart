@@ -1,4 +1,3 @@
-import 'package:changetherhythmwithget/app/data/extensions/string_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,7 +10,6 @@ class HomeController extends GetxController {
 
   var weather = WeatherModel().obs;
 
-  //var locationList = <String>[].obs;
 
   Future<void> refreshWeather() async {
     try {
@@ -43,28 +41,11 @@ class HomeController extends GetxController {
     Get.offAndToNamed(AppPages.INITIAL);
   }
 
-  /* Future<void> getSavedLocations() async {
-    print("getSavedLocations");
-    locationList.value = await weatherRepository.getAllLocations();
-    if (locationList.isNotEmpty) {
-      print("locationList: ${locationList}");
-      weather.value = await weatherRepository.getLocation(locationList.last);
-    }
-  }*/
-
   @override
   Future<void> onInit() async {
     super.onInit();
     await getWeatherFromRoute();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
 
-  @override
-  void onClose() {
-    super.onClose();
-  }
 }
